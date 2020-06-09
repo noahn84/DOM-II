@@ -15,14 +15,16 @@ destinationImg.addEventListener('mouseleave', () => {
 // 2
 // changing the color of 'welcome to fun bus!' to 'red' on double click
 const title = document.querySelector('.intro h2');
-title.addEventListener('dblclick', () => {
+title.addEventListener('dblclick', (event) => {
   title.style.color = 'red';
+  event.stopPropagation();
 });
 
 // 3
 // changing 'welcome to fun bus!' back to black
-title.addEventListener('click', () => {
+title.addEventListener('click', (event) => {
   title.style.color = 'black';
+  event.stopPropagation();
 });
 
 // 4
@@ -41,8 +43,9 @@ textContent.addEventListener('mouseleave', () => {
 // 6
 // changing the 'Let's Go!' image to another image when user clicks on image
 const letsGoImg = document.querySelector('.content-section img');
-letsGoImg.addEventListener('click', () => {
+letsGoImg.addEventListener('click', (event) => {
   letsGoImg.src = 'https://images.unsplash.com/photo-1591357339460-0f4f09050822?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80';
+  event.stopPropagation();
 });
 
 // 7
@@ -68,4 +71,26 @@ thirdTitle.addEventListener('mouseenter', () => {
 const footer = document.querySelector('footer');
 footer.addEventListener('mouseenter', () => {
   footer.style.backgroundColor = 'yellow';
+});
+
+// Nest two similar events somewhere in the site and prevent the event propagation properly
+const body = document.querySelector('body');
+body.addEventListener('dblclick', () => {
+  body.style.backgroundColor = 'red';
+});
+
+const button = document.querySelectorAll('.btn');
+button.forEach((btn) =>{
+  btn.addEventListener('dblclick', (event) => {
+    btn.style.backgroundColor = 'black';
+    event.stopPropagation();
+  });
+});
+
+// Stop the navigation items from refreshing the page by using `preventDefault()`
+const navItems = document.querySelectorAll("a");
+navItems.forEach((nav) => {
+  nav.addEventListener("click", (event) => {
+    event.preventDefault();
+  });
 });
